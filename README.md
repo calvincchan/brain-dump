@@ -79,56 +79,53 @@ What's the status of all my active ideas?
 
 ---
 
-### Claude Desktop
+### Claude.ai Projects (claude.ai)
 
-Claude Desktop works best with the **MCP filesystem server**, which lets Claude read and write your local files directly — no copy-pasting required.
+Claude.ai Projects let you persist `CLAUDE.md` as a standing instruction so every conversation in the project already knows the conventions — no re-pasting required.
 
 **Setup:**
 
-1. Install the MCP filesystem server (if not already available in your Claude Desktop config):
-   ```bash
-   npm install -g @modelcontextprotocol/server-filesystem
-   ```
+1. Go to [claude.ai](https://claude.ai) and create a new **Project** named "BrainDump".
+2. In the project's *Instructions* field, paste the full contents of `CLAUDE.md`.
+3. That's it. Every conversation in this project will follow the file conventions automatically.
 
-2. Open Claude Desktop settings and add the server to your `claude_desktop_config.json`:
-   ```json
-   {
-     "mcpServers": {
-       "braindump": {
-         "command": "npx",
-         "args": [
-           "-y",
-           "@modelcontextprotocol/server-filesystem",
-           "/absolute/path/to/BrainDump"
-         ]
-       }
-     }
-   }
-   ```
-   Replace `/absolute/path/to/BrainDump` with your actual path (e.g. `/Users/yourname/BrainDump`).
-
-3. Restart Claude Desktop. You should see the filesystem server listed as an active tool.
-
-4. Start a conversation and paste the contents of `CLAUDE.md` into your first message (or save it as a Project instruction if you have Claude Pro/Teams). This primes Claude with all the conventions.
+When you want Claude to work on a specific idea, paste the relevant file contents directly into the chat (e.g. `idea.md`, `notes.md`). Claude will edit them and return the updated content for you to save back to disk.
 
 **Example commands:**
 
 ```
-# Capture an idea
-Read my CLAUDE.md and then create a new idea: "voice-memo-transcriber" —
-an iOS shortcut that transcribes voice memos and saves them as markdown notes
+# Capture a new idea (paste CLAUDE.md once if not in a project)
+Create a new idea: "voice-memo-transcriber" — an iOS shortcut that transcribes
+voice memos and saves them as markdown notes. Give me the three files to save.
 
-# Review your index
-Read INDEX.md and tell me which ideas have been sitting in seed for the longest
+# Review your ideas
+[paste INDEX.md] — which ideas have been sitting in seed the longest?
 
 # Deep-dive on one idea
-Read ideas/pinboard-ai-digest/idea.md and notes.md, then suggest three concrete next steps
+[paste idea.md + notes.md] — suggest three concrete next steps for this idea
 
-# Tidy up
-Read all idea.md files and tell me which ones are missing tags
+# Draft a journal entry
+[paste notes.md] — add a note for today summarising the research I just described: ...
 ```
 
-**Tip:** If you use Claude Pro, create a **Project** for BrainDump and add `CLAUDE.md` as a project instruction. Claude will then know the conventions for every conversation without you having to re-paste it.
+**Tip:** For a tighter workflow, combine Claude.ai for thinking and planning with Claude Code for actually writing the files and committing — use whichever fits the moment.
+
+---
+
+### Claude Code (Desktop)
+
+Claude Code can also be launched from Claude Desktop via the integrated terminal. It has direct filesystem access and picks up `CLAUDE.md` automatically — no additional configuration needed.
+
+**Setup:**
+
+Open Claude Desktop, start an integrated terminal session, then:
+
+```bash
+cd /path/to/BrainDump
+claude
+```
+
+Claude Code will read `CLAUDE.md` on startup and can read, write, and commit files directly. All the same CLI commands from the section above apply.
 
 ## Status Lifecycle
 
